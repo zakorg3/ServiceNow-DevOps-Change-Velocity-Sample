@@ -86,6 +86,7 @@ pipeline {
 
 		stage('Sonar Scan') {
 			steps {
+				echo 'Running sonar scans'
 				//sonarSummaries()
 			}
 		}
