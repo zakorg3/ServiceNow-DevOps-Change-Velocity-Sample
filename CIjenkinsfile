@@ -103,10 +103,8 @@ pipeline {
 	post{
 		success{
 			script{
-				echo '${releasePipelineName}'
-				echo ${releasePipelineName}
-				echo 'releasePipelineName'
-				build job: '${releasePipelineName}'
+				echo "${releasePipelineName}"
+				build job: "${releasePipelineName}"
 			}
 		}
 	}
