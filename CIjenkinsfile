@@ -21,8 +21,8 @@ pipeline {
 
 	environment {
 		SCANNER_HOME = tool 'sonarScanner'
-		VERACODE_APPLICATION_NAME = 'ServiceNow DevOps App#1'
-		VERACODE_SCANNER_NAME = 'Veracode'
+		SECURITY_APPLICATION_NAME = 'ServiceNow DevOps App#1'
+		SECURITY_SCANNER_NAME = 'Veracode'
 	} 
 
 	stages {
@@ -96,7 +96,7 @@ pipeline {
 				// uncomment below line of code to trigger a new Veracode scan
 				// to get the security event back to ServiceNow, input 'waitForScan' to true
 				// veracode applicationName: "${env.VERACODE_APPLICATION_NAME}", scanName: "${BUILD_TAG}", uploadIncludesPattern: 'target/*.jar', vid: "<apiId>", vkey: "<apiKey>", waitForScan : true
-				snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode", "applicationName": "${env.VERACODE_APPLICATION_NAME}"}'
+				snDevOpsSecurityResult securityResultAttributes: '{"scanner": "${SECURITY_SCANNER_NAME}", "applicationName": "${SECURITY_APPLICATION_NAME}"}'
 			}
 		}
 	}
