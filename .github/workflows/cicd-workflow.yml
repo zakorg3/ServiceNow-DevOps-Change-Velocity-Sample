@@ -156,7 +156,7 @@ jobs:
               }
           ]'
           # Name of the Package that contains list of artifacts
-          package-name: 'app-devops-change-velocity.war'
+          package-name: 'app-devops-change-velocity-cicd.war'
           # Display Name of Job
           job-name: 'Register Package'
           
