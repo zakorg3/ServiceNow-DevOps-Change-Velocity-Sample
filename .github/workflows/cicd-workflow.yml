@@ -186,9 +186,6 @@ jobs:
           # start_date: Enter the planned start date
           # end_date: Enter the planned end date
           
-  # uncomment below lines of code to create change request using deployment gates, indent code if necessary
-  #         deployment-gate: '{"environment":"prod", "jobId":"deploy", "jobName":"Deploy"}'
-
   deploy:
     name: 'Deploy'
     needs: change
