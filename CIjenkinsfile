@@ -1,15 +1,8 @@
 def packageName = "app-devops-package.war"
-
-def artifactname = "app-devops.jar"
+def artifactname = "app-devops-artifact.jar"
 def version = "1.${BUILD_NUMBER}"
 def semanticVersion = "1.${BUILD_NUMBER}.0"
-
-def repoName = "pramaraju96/DevOps-Test"
-def pipelineName = "${JOB_NAME}"
-
-def changeRequestId = "defaultChangeRequestId"
-def stageName = "Deploy"
-
+def repoName = "2giridharj/ServiceNow-DevOps-Change-Sample" // Ensure after forking update the repoName accrodingly.
 def releasePipelineName = "CD Pipeline"
 
 pipeline {
@@ -21,8 +14,8 @@ pipeline {
 
 	environment {
 		SCANNER_HOME = tool 'sonarScanner'
-		SECURITY_APPLICATION_NAME = 'ServiceNow DevOps App#1'
-		SECURITY_SCANNER_NAME = 'Veracode'
+		VERACODE_APPLICATION_NAME = 'ServiceNow DevOps App#1' //Ensure you update the correct Application name
+		VERACODE_SCANNER_NAME = 'Veracode'
 	} 
 
 	stages {
@@ -59,53 +52,76 @@ pipeline {
 				],
 				"branchName": "main"
 				}""")
-
-				// uncomment the below block of code to use artifact step with JFrog
-				/*
-				sh 'mvn package'
-				
-				echo "Uploading the artifacts to JFrog"
-
-				script{
-					def server = Artifactory.server 'ramadevops'
-					def uploadSpec = """{
-						"files": [{
-							"pattern": "target/devops-e2e-1.40.0-SNAPSHOT.jar",
-							"target": "devops-jfrog-local-repo/"
-						}]
-					}"""
-
-					def buildInfo = server.upload(uploadSpec) 
-					server.publishBuildInfo buildInfo
-					sleep(5);
-				}
-				*/
-
 			}     
 		}
 
+		/*
 		stage('Sonar Scan') {
 			steps {
-				echo 'Running sonar scans'
 				sonarSummaries()
 			}
 		}
 
 		stage('Security Scan') {
 			steps {
-				echo 'Running security scans'
-				// uncomment below line of code to trigger a new Veracode scan
-				// to get the security event back to ServiceNow, input 'waitForScan' to true
-				// veracode applicationName: "${env.VERACODE_APPLICATION_NAME}", scanName: "${BUILD_TAG}", uploadIncludesPattern: 'target/*.jar', vid: "<apiId>", vkey: "<apiKey>", waitForScan : true
-				snDevOpsSecurityResult securityResultAttributes: '{"scanner": "${SECURITY_SCANNER_NAME}", "applicationName": "${SECURITY_APPLICATION_NAME}"}'
+				snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode", "applicationName": "${env.VERACODE_APPLICATION_NAME}"}'
+			}
+		}
+		*/
+
+		stage('Register Package') {
+			steps {
+				snDevOpsPackage(
+				name: "${packageName}",
+				artifactsPayload: """
+				{
+				    "artifacts":
+				    [
+				        {
+				            "name": "${artifactname}",
+				            "version": "${version}",
+				            "semanticVersion": "${semanticVersion}",
+				            "repositoryName": "${repoName}"
+				        }
+				    ],
+				    "branchName": "main"
+				}""")
+			}
+		}
+		  
+		stage('Change') {
+			steps {
+			    snDevOpsChange(changeRequestDetails: '''
+			    {
+			    "attributes": {
+					"requested_by": {
+						"name": "DevOps System"
+					}, //requested_by with name.
+					//You can provide requested_by with sys_id. Example: "requested_by": "62826bf03710200044e0bfc8bcbe5df1", 
+					"assignment_group": {
+						"name": "Change Management"
+					}, //assignment_group with name.
+					//You can provide assignment_group with sys_id. Example: "assignment_group": "5f721d93c0a8010e015533746de18bf9",
+					"priority": "2",
+					"comments": "This is a sample pipeline script to be added in your change step",
+					"work_notes": "Update this to work_notes",
+					"start_date": "2022-01-05 11:59:59", //This is the planned start date.
+					"end_date": "2022-01-08 11:59:59" // This is the planned end date.
+				}
+			    }''')
+			}
+		}
+
+		stage('Deploy') {
+			steps {
+				echo "Deploying the change..."
 			}
 		}
 	}
 	post{
 		success{
 			script{
-				echo "Triggering pipeline - ${releasePipelineName}"
-				build job: "${releasePipelineName}"
+				build job: '${releasePipelineName}'
 			}
 		}
 	}
