@@ -10,7 +10,7 @@ on:
 jobs:
   registerPackage:
     name: 'Register Package'
-    needs: securityScan
+    needs: registerArtifact
     runs-on: ubuntu-latest
     steps:
     - name: ServiceNow DevOps Register Package
@@ -40,39 +40,30 @@ jobs:
           job-name: 'Register Package'
 
   change:
-    name: 'Change'
+    # jobs that must complete successfully before this job will run
     needs: registerPackage
+    # type of machine to run the job on
     runs-on: ubuntu-latest
-    steps:     
-    - name: ServiceNow DevOps Change Automation
-    # You may pin to the exact commit or the version.            
-      uses: ServiceNow/servicenow-devops-change@v2.0.0
-      with:
-          # ServiceNow Instance URL
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+    name: 'ServiceNow DevOps Change'
+    steps:
+      - name: ServiceNow Change
+        uses: ServiceNow/servicenow-devops-change@v2.0.0
+        with:
           # Devops Integration Token
           devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+          # ServiceNow Instance URL
+          instance-url: ${{ secrets.SN_INSTANCE_URL }}
           # Orchestration Tool Id
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          # Display Name of the Job
-          job-name: 'Change'
-          # Github Context
+          # GitHub Context
           context-github: ${{ toJSON(github) }}
-          change-request: '{
-            "attributes": {
-              "requested_by": {
-                "name": "DevOps System"
-              },
-              "assignment_group": {
-              "name": "Change Management"
-              },
-              "priority": "2",
-              "comments": "This is a sample pipeline script to be added in your change step",
-              "work_notes": "Update this to work_notes",
-              "start_date": "2023-09-07 11:59:59",
-              "end_date": "2023-09-09 11:59:59"
-            }
-          }'
+          # Display Name of the Job
+          job-name: 'ServiceNow DevOps Change'
+          change-request: '{"attributes":{"requested_by":{"name": "DevOps System"},"assignment_group":{"name": "Change management"},"priority": "2","comments": "This is a sample pipeline script to be added in your change step","work_notes": "Update this to work_notes","start_date": "","end_date": ""}}'
+          # You can specify the requested_by attribute either with name or sys_id. Example: "requested_by":{"name": "Test User"} or "requested_by": "62826bf03710200044e0bfc8bcbe5df1"
+          # You can specify the assignment_group attribute either with name or sys_id. Example: "assignment_group":{"name": "Change Approval Team"} or "assignment_group": "5f721d93c0a8010e015533746de18bf9"
+          # start_date: Enter the planned start date
+          # end_date: Enter the planned end date
           
   # uncomment below lines of code to create change request using deployment gates, indent code if necessary
   #         deployment-gate: '{"environment":"prod", "jobId":"deploy", "jobName":"Deploy"}'
