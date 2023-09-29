@@ -10,7 +10,7 @@ on:
 jobs:
   registerPackage:
     name: 'Register Package'
-    needs: registerArtifact
+    # needs: registerArtifact
     runs-on: ubuntu-latest
     steps:
     - name: ServiceNow DevOps Register Package
