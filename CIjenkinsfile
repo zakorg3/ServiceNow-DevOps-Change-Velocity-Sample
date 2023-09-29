@@ -1,4 +1,3 @@
-def packageName = "app-devops-package-ci.war"
 def artifactname = "app-devops-artifact-ci.jar"
 def version = "1.${BUILD_NUMBER}"
 def semanticVersion = "1.${BUILD_NUMBER}.0"
