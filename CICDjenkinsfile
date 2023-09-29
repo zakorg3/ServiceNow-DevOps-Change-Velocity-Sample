@@ -1,5 +1,5 @@
-def packageName = "app-devops-package.war"
-def artifactname = "app-devops-artifact.jar"
+def packageName = "app-devops-package-cicd.war"
+def artifactname = "app-devops-artifact-cicd.jar"
 def version = "1.${BUILD_NUMBER}"
 def semanticVersion = "1.${BUILD_NUMBER}.0"
 def repoName = "2giridharj/ServiceNow-DevOps-Change-Sample" // Ensure after forking update the repoName accrodingly.
