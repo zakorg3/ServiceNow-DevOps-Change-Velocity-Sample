@@ -1,14 +1,8 @@
 def packageName = "app-devops-package.war"
-
-def artifactname = "app-devops.jar"
+def artifactname = "app-devops-artifact.jar"
 def version = "1.${BUILD_NUMBER}"
 def semanticVersion = "1.${BUILD_NUMBER}.0"
-
-def repoName = "pramaraju96/DevOps-Test"
-def pipelineName = "${JOB_NAME}"
-
-def changeRequestId = "defaultChangeRequestId"
-def stageName = "Deploy"
+def repoName = "2giridharj/ServiceNow-DevOps-Change-Sample" // Ensure after forking update the repoName accrodingly.
 
 pipeline {
 	agent any
@@ -31,25 +25,6 @@ pipeline {
 					    ],
 					    "branchName": "main"
 				}""")
-				
-				// uncomment below block of code to use JFrog artifact
-				/*
-				echo "Downloading the artifacts from JFrog"
-
-				script{
-					def server = Artifactory.server 'ramadevops'
-					def downSpec= """{
-						"files": [{
-							"pattern": "devops-jfrog-local-repo/devops-e2e-1.40.0-SNAPSHOT.jar",
-							"target":"/var/jenkins_home/workspace/rama folder/CD Pipeline/${BUILD_NUMBER}/"
-						}]
-					}"""
-
-					def buildInfo = server.download(downSpec) 
-					server.publishBuildInfo buildInfo
-					sleep(5);
-				}
-				*/
 			}
 		}
 		  
