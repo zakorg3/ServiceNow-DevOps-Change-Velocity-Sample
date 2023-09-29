@@ -10,7 +10,6 @@ on:
 jobs:
   registerPackage:
     name: 'Register Package'
-    # needs: registerArtifact
     runs-on: ubuntu-latest
     steps:
     - name: ServiceNow DevOps Register Package
@@ -64,9 +63,6 @@ jobs:
           # You can specify the assignment_group attribute either with name or sys_id. Example: "assignment_group":{"name": "Change Approval Team"} or "assignment_group": "5f721d93c0a8010e015533746de18bf9"
           # start_date: Enter the planned start date
           # end_date: Enter the planned end date
-          
-  # uncomment below lines of code to create change request using deployment gates, indent code if necessary
-  #         deployment-gate: '{"environment":"prod", "jobId":"deploy", "jobName":"Deploy"}'
 
   deploy:
     name: 'Deploy'
