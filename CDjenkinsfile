@@ -33,6 +33,7 @@ pipeline {
 			    snDevOpsChange(changeRequestDetails: '''
 			    {
 			    "attributes": {
+					"chg_model":{"name":"DevOps"},
 					"requested_by": {
 						"name": "DevOps System"
 					}, //requested_by with name.
