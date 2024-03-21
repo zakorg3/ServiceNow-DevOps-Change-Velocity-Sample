@@ -81,7 +81,7 @@ pipeline {
 def sonarSummaries() {
 	withSonarQubeEnv(installationName: '<sonar-cloud-installation-name>'){
 		sh 'mvn clean verify sonar:sonar \
-		    -Dsonar.login=1926d793f92181dd0ac406335d4d4bea392a3023 \
+		    -Dsonar.login=<sonar-cloud-access-token> \
 		    -Dsonar.host.url=https://sonarcloud.io \
 		    -Dsonar.organization=<sonar-cloud-org-name> \
 		    -Dsonar.projectKey=<sonar-cloud-project-key>'
