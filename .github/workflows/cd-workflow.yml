@@ -41,7 +41,7 @@ jobs:
                   "version": "1.21",
                   "semanticVersion": "1.21.0",
                   "repositoryName": "${{ github.repository }}"
-              },
+              }
           ]'
           # Name of the Package that contains list of artifacts
           package-name: 'app-devops-change-velocity.war'
