@@ -81,6 +81,18 @@ jobs:
                   "version": "1.15",
                   "semanticVersion": "1.15.0",
                   "repositoryName": "${{ github.repository }}"
+              },
+              {
+                  "name": "app-devops-ci2.jar",
+                  "version": "1.15",
+                  "semanticVersion": "1.15.0",
+                  "repositoryName": "${{ github.repository }}"
+              },
+              {
+                  "name": "app-devops-ci3.jar",
+                  "version": "1.15",
+                  "semanticVersion": "1.15.0",
+                  "repositoryName": "${{ github.repository }}"
               }
           ]'
 
