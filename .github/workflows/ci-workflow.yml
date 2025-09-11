@@ -4,7 +4,7 @@ name: CI GitHub workflow
 
 on: 
     pull_request:
-      branches: [ "main" ]
+      branches: [ "artifact" ]
       types: [opened, synchronize, reopened]
     workflow_dispatch:
     # - push:
@@ -67,9 +67,9 @@ jobs:
           # Devops Integration Token
           devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
           # ServiceNow Instance URL
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+          instance-url: ${{ vars.SN_INSTANCE_URL }}
           # Orchestration Tool Id
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          tool-id: ${{ vars.SN_ORCHESTRATION_TOOL_ID }}
           # Display Name of the Job
           job-name: 'Register Artifact'
           # Github Context
