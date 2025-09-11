@@ -25,7 +25,7 @@ jobs:
           # List of Artifacts in JSON format
           artifacts: '[
               {
-                  "name": "app-devops-ci.jar",
+                  "name": "prod-servlet.jar",
                   "version": "1.15",
                   "semanticVersion": "1.15.0",
                   "repositoryName": "${{ github.repository }}"
