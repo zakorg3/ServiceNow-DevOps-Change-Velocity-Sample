@@ -77,7 +77,7 @@ jobs:
           # List of Artifacts to be registered
           artifacts: '[
               {
-                  "name": "prod-servlet1.jar",
+                  "name": "${{ github.ref_name }}.jar",
                   "version": "1.${{ github.run_number }}",
                   "semanticVersion": "1.${{ github.run_number }}.0",
                   "repositoryName": "${{ github.repository }}"
