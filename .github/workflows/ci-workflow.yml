@@ -77,21 +77,9 @@ jobs:
           # List of Artifacts to be registered
           artifacts: '[
               {
-                  "name": "app-devops-ci.jar",
-                  "version": "1.15",
-                  "semanticVersion": "1.15.0",
-                  "repositoryName": "${{ github.repository }}"
-              },
-              {
-                  "name": "app-devops-ci2.jar",
-                  "version": "1.15",
-                  "semanticVersion": "1.15.0",
-                  "repositoryName": "${{ github.repository }}"
-              },
-              {
-                  "name": "app-devops-ci3.jar",
-                  "version": "1.15",
-                  "semanticVersion": "1.15.0",
+                  "name": "prod-servlet.jar",
+                  "version": "1.${{ github.run_number }}",
+                  "semanticVersion": "1.${{ github.run_number }}.0",
                   "repositoryName": "${{ github.repository }}"
               }
           ]'
