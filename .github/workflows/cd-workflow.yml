@@ -14,14 +14,14 @@ jobs:
     steps:
     - name: ServiceNow DevOps Register Package
     # You may pin to the exact commit or the version.           
-      uses: ServiceNow/servicenow-devops-register-package@v3.1.0
+      uses: ServiceNow/servicenow-devops-register-package@main
       with:
           # Devops Integration Token
           devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
           # ServiceNow Instance URL
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+          instance-url: ${{ vars.SN_INSTANCE_URL }}
           # Orchestration Tool Id of the tool created in ServiceNow
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          tool-id: ${{ vars.SN_ORCHESTRATION_TOOL_ID }}
           # Github Context
           context-github: ${{ toJSON(github) }}
           # List of Artifacts in JSON format
@@ -46,14 +46,14 @@ jobs:
     name: 'ServiceNow DevOps Change'
     steps:
       - name: ServiceNow Change
-        uses: ServiceNow/servicenow-devops-change@v3.1.0
+        uses: ServiceNow/servicenow-devops-change@main
         with:
           # Devops Integration Token
           devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
           # ServiceNow Instance URL
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+          instance-url: ${{ vars.SN_INSTANCE_URL }}
           # Orchestration Tool Id
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          tool-id: ${{ vars.SN_ORCHESTRATION_TOOL_ID }}
           # GitHub Context
           context-github: ${{ toJSON(github) }}
           # Display Name of the Job
