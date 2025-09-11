@@ -78,8 +78,8 @@ jobs:
           artifacts: '[
               {
                   "name": "app-devops-ci.jar",
-                  "version": "1.${{ github.run_number }}",
-                  "semanticVersion": "1.${{ github.run_number }}.0",
+                  "version": "1.15",
+                  "semanticVersion": "1.15.0",
                   "repositoryName": "${{ github.repository }}"
               }
           ]'
