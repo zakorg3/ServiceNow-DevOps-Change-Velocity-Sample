@@ -28,8 +28,20 @@ jobs:
           artifacts: '[
               {
                   "name": "app-devops-ci.jar",
-                  "version": "1.${{ github.run_number }}",
-                  "semanticVersion": "1.${{ github.run_number }}.0",
+                  "version": "1.10",
+                  "semanticVersion": "1.10.0",
+                  "repositoryName": "${{ github.repository }}"
+              },
+              {
+                  "name": "app-devops-ci.jar",
+                  "version": "1.11",
+                  "semanticVersion": "1.11.0",
+                  "repositoryName": "${{ github.repository }}"
+              },
+              {
+                  "name": "app-devops-ci.jar",
+                  "version": "1.9",
+                  "semanticVersion": "1.9.0",
                   "repositoryName": "${{ github.repository }}"
               }
           ]'
