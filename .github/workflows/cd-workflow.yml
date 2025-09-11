@@ -25,23 +25,23 @@ jobs:
           # List of Artifacts in JSON format
           artifacts: '[
               {
-                  "name": "prod-servlet.jar",
-                  "version": "1.15",
-                  "semanticVersion": "1.15.0",
+                  "name": "3/merge.jar",
+                  "version": "1.20",
+                  "semanticVersion": "1.20.0",
                   "repositoryName": "${{ github.repository }}"
               },
               {
-                  "name": "app-devops-ci2.jar",
-                  "version": "1.15",
-                  "semanticVersion": "1.15.0",
+                  "name": "4/merge.jar",
+                  "version": "1.22",
+                  "semanticVersion": "1.22.0",
                   "repositoryName": "${{ github.repository }}"
               },
               {
-                  "name": "app-devops-ci3.jar",
-                  "version": "1.15",
-                  "semanticVersion": "1.15.0",
+                  "name": "5/merge.jar",
+                  "version": "1.21",
+                  "semanticVersion": "1.21.0",
                   "repositoryName": "${{ github.repository }}"
-              }
+              },
           ]'
           # Name of the Package that contains list of artifacts
           package-name: 'app-devops-change-velocity.war'
